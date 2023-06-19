@@ -31,4 +31,8 @@ class modelsRecipe {
         return this._description
     }
 
+    get time() {
+        return this._time
+    }
+
 }

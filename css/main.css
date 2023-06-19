@@ -139,6 +139,21 @@ main {
     border-radius: 21px;
     display: flex;
     flex-direction: column;
+    position: relative;
+}
+
+.time {
+    position: absolute;
+    width: 63px;
+    height: 26px;
+    left: 295px;
+    top: 21px;
+    background: #FFD15B;
+    border-radius: 14px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 26px;
+    
 }
 
 

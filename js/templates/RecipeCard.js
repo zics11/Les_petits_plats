@@ -25,6 +25,9 @@ class RecipeCard {
 
         const recipeCard = `
             <img src="${this._recipe.image}" />
+            <div class="time">
+            ${this._recipe.time} min
+            </div>
             <div class="recipe_description">
                 <h2>${this._recipe.name}</h2>
                 <h3>RECETTE</h3>

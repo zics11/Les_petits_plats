@@ -45,6 +45,9 @@ class App {
   async main() {
     await this.getRecipes()
 
+    const Search = new MainSearch(this.Recipes)
+    Search.onSearch()
+
     this.Recipes.forEach(recipe => {
       const Template = new RecipeCard(recipe)
     
