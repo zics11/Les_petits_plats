@@ -39,6 +39,7 @@ class App {
     const data = await response.json();
     const recipesData = data.recipes;
     this.Recipes = recipesData.map(recipeData => new modelsRecipe(recipeData));
+    return this.Recipes
   }
 
   async main() {
@@ -62,3 +63,5 @@ class App {
 const app = new App()
 
 app.main()
+
+console.log('main',app.getRecipes())
