@@ -9,7 +9,6 @@ class Menu {
         this.$butttonIngredientWrapper = document.querySelector('#btn-ingredients');
         this.$butttontApplianceWrapper = document.querySelector('#btn-appareils');
         this.$butttonUstensilsWrapper = document.querySelector('#btn-ustensiles');
-
     }
 
     toggleMenu() {
@@ -27,7 +26,7 @@ class Menu {
             ustensils: this.$menuListUstensilsWrapper
         };
 
-        buttonWrapperMap[this._property].addEventListener("click", () => {
+        buttonWrapperMap[this._property].addEventListener('click', () => {
             isOpen = !isOpen; // Inversion de l'état du menu
 
             if (isOpen) {
@@ -44,15 +43,19 @@ class Menu {
         this._recipes.forEach((recipe) => {
             if (this._property === 'ingredients') {
                 recipe.ingredients.forEach((ingredientObj) => {
-                    if (ingredientObj.ingredient) {
+                    if (ingredientObj.ingredient.toLowerCase().includes(this.query.toLowerCase())) {
                         allItem.add(ingredientObj.ingredient);
                     }
                 });
             } else if (this._property === 'appliance') {
-                allItem.add(recipe.appliance);
+                if (recipe.appliance.toLowerCase().includes(this.query.toLowerCase())) {
+                    allItem.add(recipe.appliance);
+                }
             } else if (this._property === 'ustensils') {
                 recipe.ustensils.forEach((ustensil) => {
-                    allItem.add(ustensil);
+                    if (ustensil.toLowerCase().includes(this.query.toLowerCase())) {
+                        allItem.add(ustensil);
+                    }
                 });
             }
         });
@@ -60,19 +63,24 @@ class Menu {
         return Array.from(allItem);
     }
 
-    insertMenuList() {
-        const MenuList = this.list()
+    insertMenuList(query = '') {
+        this.query = query;
+        const filteredItems = this.list(query);
+
+        const MenuList = filteredItems
             .map((item) => `<li>${item}</li>`)
             .join('');
 
         this.$wrapper.innerHTML = MenuList;
+
         if (this._property === 'ingredients') {
+            this.$menuListIngredientWrapper.innerHTML = '';
             this.$menuListIngredientWrapper.appendChild(this.$wrapper);
-        }
-        if (this._property === 'appliance') {
+        } else if (this._property === 'appliance') {
+            this.$menuListApplianceWrapper.innerHTML = '';
             this.$menuListApplianceWrapper.appendChild(this.$wrapper);
-        }
-        if (this._property === 'ustensils') {
+        } else if (this._property === 'ustensils') {
+            this.$menuListUstensilsWrapper.innerHTML = '';
             this.$menuListUstensilsWrapper.appendChild(this.$wrapper);
         }
 

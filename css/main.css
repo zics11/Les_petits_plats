@@ -103,7 +103,7 @@ main {
 
 }
 
-.menu{
+.menu {
     position: relative;
 }
 
@@ -117,7 +117,7 @@ main {
     text-align: left;
     padding: 17px;
     position: relative;
-    background:white
+    background: white
 }
 
 .btn::after {
@@ -129,7 +129,7 @@ main {
     top: 20px;
 }
 
-.menu_list{
+.menu_list {
     display: none;
     position: absolute;
     background-color: #ffffff;
@@ -137,15 +137,42 @@ main {
     z-index: 1;
     border-radius: 0px 0px 11px 11px;
     padding: 17px;
-    top: 45px;
+    top: 80px;
 }
 
-.menu_list li{
+.menu_list li {
     list-style: none;
     text-align: left;
     margin-top: 15px;
+}
 
+.search-menu {
+    display: flex;
+    width: 100%;
+    height: 36px;
+    position: relative;
+}
 
+.search-menu input {
+    background: white;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #C6C6C6;
+    padding: 10px 36px 10px 10px;
+    color: #7A7A7A;
+    font-size: 14px;
+    font-family: 'Manrope', sans-serif;
+    position: relative;
+    border-radius: 2px;
+
+}
+
+.search-menu i {
+    color: #7A7A7A;
+    font-size: 18px;
+    position: absolute;
+    right: 10px;
+    top: 9px;
 }
 
 
@@ -178,7 +205,7 @@ main {
     font-size: 12px;
     text-align: center;
     line-height: 26px;
-    
+
 }
 
 

@@ -52,7 +52,6 @@ class MainSearch {
         const MenuListUstensils = new Menu(Recipes, 'ustensils');
         MenuListUstensils.insertMenuList();
     
-    
     }
 
     onSearch() {
