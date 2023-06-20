@@ -3,6 +3,10 @@ class MainSearch {
         this.Recipes = Recipes
         this.$searchFormWrapper = document.querySelector('#search')
         this.$recipesWrapper = document.querySelector('.recipes-wrapper')
+        this.$menuListIngredientWrapper = document.querySelector('#menu-ingredients');
+        this.$menuListApplianceWrapper = document.querySelector('#menu-appareils');
+        this.$menuListUstensilsWrapper = document.querySelector('#menu-ustensiles');
+
     }
 
     search(query) {
@@ -26,6 +30,9 @@ class MainSearch {
 
     clearRecipesWrapper() {
         this.$recipesWrapper.innerHTML = ""
+        this.$menuListIngredientWrapper.innerHTML = ""
+        this.$menuListApplianceWrapper.innerHTML = ""
+        this.$menuListUstensilsWrapper.innerHTML = ""
     }
 
     displayRecipes(Recipes) {
@@ -35,6 +42,17 @@ class MainSearch {
             const Template = new RecipeCard(Recipe)
             this.$recipesWrapper.appendChild(Template.createRecipeCard())
         })
+
+        const MenuList = new Menu(Recipes, 'ingredients');
+        MenuList.insertMenuList();
+
+        const MenuListAppliance = new Menu(Recipes, 'appliance');
+        MenuListAppliance.insertMenuList();
+    
+        const MenuListUstensils = new Menu(Recipes, 'ustensils');
+        MenuListUstensils.insertMenuList();
+    
+    
     }
 
     onSearch() {

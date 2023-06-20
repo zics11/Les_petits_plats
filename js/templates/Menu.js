@@ -6,7 +6,36 @@ class Menu {
         this.$menuListIngredientWrapper = document.querySelector('#menu-ingredients');
         this.$menuListApplianceWrapper = document.querySelector('#menu-appareils');
         this.$menuListUstensilsWrapper = document.querySelector('#menu-ustensiles');
+        this.$butttonIngredientWrapper = document.querySelector('#btn-ingredients');
+        this.$butttontApplianceWrapper = document.querySelector('#btn-appareils');
+        this.$butttonUstensilsWrapper = document.querySelector('#btn-ustensiles');
 
+    }
+
+    toggleMenu() {
+        let isOpen = false; // Variable de statut pour suivre l'état du menu
+
+        const buttonWrapperMap = {
+            ingredients: this.$butttonIngredientWrapper,
+            appliance: this.$butttontApplianceWrapper,
+            ustensils: this.$butttonUstensilsWrapper
+        };
+
+        const menuWrapperMap = {
+            ingredients: this.$menuListIngredientWrapper,
+            appliance: this.$menuListApplianceWrapper,
+            ustensils: this.$menuListUstensilsWrapper
+        };
+
+        buttonWrapperMap[this._property].addEventListener("click", () => {
+            isOpen = !isOpen; // Inversion de l'état du menu
+
+            if (isOpen) {
+                menuWrapperMap[this._property].style.display = 'block'; // Ouverture du menu
+            } else {
+                menuWrapperMap[this._property].style.display = 'none'; // Fermeture du menu
+            }
+        });
     }
 
     list() {

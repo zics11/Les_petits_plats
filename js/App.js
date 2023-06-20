@@ -2,7 +2,6 @@
 class App {
   constructor() {
     this.$recipesWrapper = document.querySelector('.recipes-wrapper')
-    this.$menuListIngredientWrapper = document.querySelector('#menu-ingredients')
     this.dataUrl = '/data/recipes.json'
     this.Recipes = []
   }
@@ -28,10 +27,22 @@ class App {
       )
     })
 
-    const MenuList = new Menu(this.Recipes, 'ingredients');
-    MenuList.insertMenuList();
+    const MenuListIngredient = new Menu(this.Recipes, 'ingredients');
+    MenuListIngredient.insertMenuList();
+    MenuListIngredient.toggleMenu();
 
-    console.log("list", MenuList.listIngredients())
+
+    const MenuListAppliance = new Menu(this.Recipes, 'appliance');
+    MenuListAppliance.insertMenuList();
+    MenuListAppliance.toggleMenu();
+
+
+    const MenuListUstensils = new Menu(this.Recipes, 'ustensils');
+    MenuListUstensils.insertMenuList();
+    MenuListUstensils.toggleMenu();
+
+
+
 
 
   }

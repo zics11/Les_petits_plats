@@ -130,7 +130,7 @@ main {
 }
 
 .menu_list{
-    display: block;
+    display: none;
     position: absolute;
     background-color: #ffffff;
     width: 195px;
