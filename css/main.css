@@ -103,6 +103,10 @@ main {
 
 }
 
+.menu{
+    position: relative;
+}
+
 .btn {
     width: 195px;
     height: 56px;
@@ -113,6 +117,7 @@ main {
     text-align: left;
     padding: 17px;
     position: relative;
+    background:white
 }
 
 .btn::after {
@@ -123,6 +128,26 @@ main {
     right: 17px;
     top: 20px;
 }
+
+.menu_list{
+    display: block;
+    position: absolute;
+    background-color: #ffffff;
+    width: 195px;
+    z-index: 1;
+    border-radius: 0px 0px 11px 11px;
+    padding: 17px;
+    top: 45px;
+}
+
+.menu_list li{
+    list-style: none;
+    text-align: left;
+    margin-top: 15px;
+
+
+}
+
 
 .recipes-wrapper {
     margin-top: 55px;

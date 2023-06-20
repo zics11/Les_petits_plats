@@ -35,4 +35,13 @@ class modelsRecipe {
         return this._time
     }
 
+    get appliance() {
+        return this._appliance
+    }
+
+    get ustensils() {
+        return this._ustensils
+    }
+
+
 }

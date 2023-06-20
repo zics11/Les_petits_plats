@@ -32,9 +32,18 @@
     </header>
     <main>
         <section class="filter">
-            <button id="btn-ingredients" class="btn">Ingrédients</button>
-            <button id="btn-appareils" class="btn">Appareils</button>
-            <button id="btn-ustensiles" class="btn">Ustensiles</button>
+            <div class="menu">
+                <button id="btn-ingredients" class="btn">Ingrédients</button>
+                <ul id="menu-ingredients" class="menu_list"></ul>
+            </div>
+            <div class="menu">
+                <button id="btn-appareils" class="btn">Appareils</button>
+                <ul id="menu-appareils" class="menu_list"></ul>
+            </div>
+            <div class="menu">
+                <button id="btn-ustensiles" class="btn">Ustensiles</button>
+                <ul id="menu-ustensiles" class="menu_list"></ul>
+            </div>
         </section>
         <section class="recipes-wrapper">
         </section>
@@ -45,6 +54,8 @@
     <script src="/js/models/modelsRecipes.js"></script>
     <script src="/js/templates/RecipeCard.js"></script>
     <script src="/js/search/MainSearch.js"></script>
+    <script src="/js/templates/Menu.js"></script>
+
 </body>
 
 </html>
