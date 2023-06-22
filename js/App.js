@@ -20,8 +20,14 @@ class App {
     const Search = new MainSearch(this.Recipes)
     Search.onSearch()
 
-    const menuSearch = new MenuSearch(this.Recipes)
-    menuSearch.onSearch()
+    const menuSearchIngredient  = new MenuSearch(this.Recipes, 'ingredients') 
+    menuSearchIngredient.onSearch()
+
+    const menuSearchAppliance  = new MenuSearch(this.Recipes, 'appliance') 
+    menuSearchAppliance.onSearch()
+
+    const menuSearchUstensils  = new MenuSearch(this.Recipes, 'ustensils') 
+    menuSearchUstensils.onSearch()
 
     this.Recipes.forEach(recipe => {
       const Template = new RecipeCard(recipe)
