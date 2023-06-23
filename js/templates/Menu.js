@@ -3,12 +3,16 @@ class Menu {
         this._recipes = recipes;
         this._property = property;
         this.$wrapper = document.createElement('li');
-        this.$menuListIngredientWrapper = document.querySelector('#menu-ingredients');
-        this.$menuListApplianceWrapper = document.querySelector('#menu-appareils');
-        this.$menuListUstensilsWrapper = document.querySelector('#menu-ustensiles');
+        this.$listIngredientWrapper = document.querySelector('#list-ingredients');
+        this.$listApplianceWrapper = document.querySelector('#list-appareils');
+        this.$listUstensilsWrapper = document.querySelector('#list-ustensiles');
         this.$butttonIngredientWrapper = document.querySelector('#btn-ingredients');
         this.$butttontApplianceWrapper = document.querySelector('#btn-appareils');
         this.$butttonUstensilsWrapper = document.querySelector('#btn-ustensiles');
+        this.$menuIngredientWrapper = document.querySelector('#menu-ingredients');
+        this.$menuApplianceWrapper = document.querySelector('#menu-appareils');
+        this.$menuUstensilsWrapper = document.querySelector('#menu-ustensiles');
+
     }
 
     toggleMenu() {
@@ -21,9 +25,9 @@ class Menu {
         };
 
         const menuWrapperMap = {
-            ingredients: this.$menuListIngredientWrapper,
-            appliance: this.$menuListApplianceWrapper,
-            ustensils: this.$menuListUstensilsWrapper
+            ingredients: this.$menuIngredientWrapper,
+            appliance: this.$menuApplianceWrapper,
+            ustensils: this.$menuUstensilsWrapper
         };
 
         buttonWrapperMap[this._property].addEventListener('click', () => {
@@ -31,8 +35,12 @@ class Menu {
 
             if (isOpen) {
                 menuWrapperMap[this._property].style.display = 'block'; // Ouverture du menu
+                buttonWrapperMap[this._property].classList.remove('open')
+
             } else {
                 menuWrapperMap[this._property].style.display = 'none'; // Fermeture du menu
+                buttonWrapperMap[this._property].classList.add('open')
+
             }
         });
     }
@@ -74,14 +82,14 @@ class Menu {
         this.$wrapper.innerHTML = MenuList;
 
         if (this._property === 'ingredients') {
-            this.$menuListIngredientWrapper.innerHTML = '';
-            this.$menuListIngredientWrapper.appendChild(this.$wrapper);
+            this.$listIngredientWrapper.innerHTML = '';
+            this.$listIngredientWrapper.appendChild(this.$wrapper);
         } else if (this._property === 'appliance') {
-            this.$menuListApplianceWrapper.innerHTML = '';
-            this.$menuListApplianceWrapper.appendChild(this.$wrapper);
+            this.$listApplianceWrapper.innerHTML = '';
+            this.$listApplianceWrapper.appendChild(this.$wrapper);
         } else if (this._property === 'ustensils') {
-            this.$menuListUstensilsWrapper.innerHTML = '';
-            this.$menuListUstensilsWrapper.appendChild(this.$wrapper);
+            this.$listUstensilsWrapper.innerHTML = '';
+            this.$listUstensilsWrapper.appendChild(this.$wrapper);
         }
 
         return this.$wrapper;

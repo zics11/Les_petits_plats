@@ -129,7 +129,12 @@ main {
     top: 20px;
 }
 
-.menu_list {
+.open .btn::after {
+    transform: rotateX(180deg)
+}
+
+
+.menu-item {
     display: none;
     position: absolute;
     background-color: #ffffff;
@@ -137,7 +142,12 @@ main {
     z-index: 1;
     border-radius: 0px 0px 11px 11px;
     padding: 17px;
-    top: 80px;
+    top: 40px;
+}
+
+.menu_list {
+    margin-top: 30px;
+    padding-left: 0px;
 }
 
 .menu_list li {

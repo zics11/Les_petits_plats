@@ -6,9 +6,9 @@ class MenuSearch {
         this.$searchImputApplianceWrapper = document.querySelector('#search-appareils');
         this.$searchImputUstensilsWrapper = document.querySelector('#search-ustensiles');
         this.$recipesIngredientWrapper = document.querySelector('.recipes-wrapper');
-        this.$menuListIngredientWrapper = document.querySelector('#menu-ingredients');
-        this.$menuListApplianceWrapper = document.querySelector('#menu-appareils');
-        this.$menuListUstensilsWrapper = document.querySelector('#menu-ustensiles');
+        this.$listIngredientWrapper = document.querySelector('#list-ingredients');
+        this.$listApplianceWrapper = document.querySelector('#list-appareils');
+        this.$listUstensilsWrapper = document.querySelector('#list-ustensiles');
     }
 
     search(query) {
@@ -34,12 +34,12 @@ class MenuSearch {
     }
 
     clearListWrapper() {
-        const menuListhWrapperMap = {
-            ingredients: this.$menuListIngredientWrapper,
-            appliance: this.$menuListApplianceWrapper,
-            ustensils: this.$menuListUstensilsWrapper
+        const listhWrapperMap = {
+            ingredients: this.$listIngredientWrapper,
+            appliance: this.$listApplianceWrapper,
+            ustensils: this.$listUstensilsWrapper
         };
-        menuListhWrapperMap[this.Property].innerHTML = "";
+        listhWrapperMap[this.Property].innerHTML = "";
     }
 
     displayList(Recipes, query) {
