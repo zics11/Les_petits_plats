@@ -12,6 +12,13 @@ class Menu {
         this.$menuIngredientWrapper = document.querySelector('#menu-ingredients');
         this.$menuApplianceWrapper = document.querySelector('#menu-appareils');
         this.$menuUstensilsWrapper = document.querySelector('#menu-ustensiles');
+        this.$selectedIngredientWrapper = document.querySelector('#item-selected-ingredients');
+        this.$selectedApplianceWrapper = document.querySelector('#item-selected-appareils');
+        this.$selectedUstensilsWrapper = document.querySelector('#item-selected-ustensiles');
+        this.$itemSelectedWrapper = document.querySelector('#item-selected');
+        this.$labelSearchWrapper = document.querySelector('#list_label-search');
+
+
 
     }
 
@@ -44,6 +51,77 @@ class Menu {
             }
         });
     }
+
+    selectItem() {
+        const menuItems = this.$wrapper.querySelectorAll('li');
+        const than = this; // Pour référencer l'instance de Menu à l'intérieur de la fonction de rappel
+
+        menuItems.forEach((item) => {
+            item.addEventListener('click', () => {
+                than.moveItemToSelected(item);
+            });
+        });
+    }
+
+    moveItemToSelected(item) {
+        item.remove();
+
+        const listhWrapperMap = {
+            ingredients: this.$selectedIngredientWrapper,
+            appliance: this.$selectedApplianceWrapper,
+            ustensils: this.$selectedUstensilsWrapper
+        };
+
+        const selectedItem = document.createElement('span');
+        const selectedItemClone = document.createElement('span');
+
+        selectedItem.textContent = item.textContent;
+        selectedItemClone.textContent = item.textContent;
+
+
+        selectedItem.addEventListener('click', () => {
+            this.removeSelectedItem(selectedItem, selectedItemClone);
+        });
+        selectedItemClone.addEventListener('click', () => {
+            this.removeSelectedItem(selectedItem, selectedItemClone);
+        });
+
+
+        listhWrapperMap[this._property].appendChild(selectedItem);
+        this.$labelSearchWrapper.appendChild(selectedItemClone);
+
+    }
+
+    removeSelectedItem(selectedItem, selectedItemClone) {
+        const itemText = selectedItem.textContent;
+        selectedItem.remove();
+        selectedItemClone.remove();
+
+        const menuWrapperMap = {
+            ingredients: this.$menuIngredientWrapper,
+            appliance: this.$menuApplianceWrapper,
+            ustensils: this.$menuUstensilsWrapper
+        };
+
+        const listWrapperMap = {
+            ingredients: this.$listIngredientWrapper,
+            appliance: this.$listApplianceWrapper,
+            ustensils: this.$listUstensilsWrapper
+        };
+
+        // Créer un nouvel élément li pour réinsérer l'élément supprimé dans la liste d'origine
+        const listItem = document.createElement('li');
+        listItem.textContent = itemText;
+
+        // Ajouter l'événement de clic pour sélectionner à nouveau l'élément
+        listItem.addEventListener('click', () => {
+            this.moveItemToSelected(listItem);
+        });
+
+        listWrapperMap[this._property].appendChild(listItem);
+    }
+
+
 
     list() {
         const allItem = new Set();
@@ -91,7 +169,7 @@ class Menu {
             this.$listUstensilsWrapper.innerHTML = '';
             this.$listUstensilsWrapper.appendChild(this.$wrapper);
         }
-
+        this.selectItem(); // Ajouter les événements de clic aux éléments de la liste
         return this.$wrapper;
     }
 }

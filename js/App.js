@@ -20,13 +20,13 @@ class App {
     const Search = new MainSearch(this.Recipes)
     Search.onSearch()
 
-    const menuSearchIngredient  = new MenuSearch(this.Recipes, 'ingredients') 
+    const menuSearchIngredient = new MenuSearch(this.Recipes, 'ingredients')
     menuSearchIngredient.onSearch()
 
-    const menuSearchAppliance  = new MenuSearch(this.Recipes, 'appliance') 
+    const menuSearchAppliance = new MenuSearch(this.Recipes, 'appliance')
     menuSearchAppliance.onSearch()
 
-    const menuSearchUstensils  = new MenuSearch(this.Recipes, 'ustensils') 
+    const menuSearchUstensils = new MenuSearch(this.Recipes, 'ustensils')
     menuSearchUstensils.onSearch()
 
     this.Recipes.forEach(recipe => {
@@ -40,19 +40,13 @@ class App {
     MenuListIngredient.insertMenuList();
     MenuListIngredient.toggleMenu();
 
-
     const MenuListAppliance = new Menu(this.Recipes, 'appliance');
     MenuListAppliance.insertMenuList();
     MenuListAppliance.toggleMenu();
 
-
     const MenuListUstensils = new Menu(this.Recipes, 'ustensils');
     MenuListUstensils.insertMenuList();
     MenuListUstensils.toggleMenu();
-
-
-
-
 
   }
 

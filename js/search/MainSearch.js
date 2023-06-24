@@ -3,9 +3,9 @@ class MainSearch {
         this.Recipes = Recipes
         this.$searchFormWrapper = document.querySelector('#search')
         this.$recipesWrapper = document.querySelector('.recipes-wrapper')
-        this.$menuListIngredientWrapper = document.querySelector('#menu-ingredients');
-        this.$menuListApplianceWrapper = document.querySelector('#menu-appareils');
-        this.$menuListUstensilsWrapper = document.querySelector('#menu-ustensiles');
+        this.$listIngredientWrapper = document.querySelector('#list-ingredients');
+        this.$listApplianceWrapper = document.querySelector('#list-appareils');
+        this.$listUstensilsWrapper = document.querySelector('#list-ustensiles');
 
     }
 
@@ -30,9 +30,9 @@ class MainSearch {
 
     clearRecipesWrapper() {
         this.$recipesWrapper.innerHTML = ""
-        this.$menuListIngredientWrapper.innerHTML = ""
-        this.$menuListApplianceWrapper.innerHTML = ""
-        this.$menuListUstensilsWrapper.innerHTML = ""
+        this.$listIngredientWrapper.innerHTML = ""
+        this.$listApplianceWrapper.innerHTML = ""
+        this.$listUstensilsWrapper.innerHTML = ""
     }
 
     displayRecipes(Recipes) {
@@ -48,10 +48,10 @@ class MainSearch {
 
         const MenuListAppliance = new Menu(Recipes, 'appliance');
         MenuListAppliance.insertMenuList();
-    
+
         const MenuListUstensils = new Menu(Recipes, 'ustensils');
         MenuListUstensils.insertMenuList();
-    
+
     }
 
     onSearch() {
