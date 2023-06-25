@@ -6,20 +6,65 @@ class MainSearch {
         this.$listIngredientWrapper = document.querySelector('#list-ingredients');
         this.$listApplianceWrapper = document.querySelector('#list-appareils');
         this.$listUstensilsWrapper = document.querySelector('#list-ustensiles');
+        this.$selectedFilterIngredient = []
+        this.$selectedFilterAppliance = []
+        this.$selectedFilterUstensils = []
+
 
     }
 
-    search(query) {
+    updateFilters(category, item, isFiltered) {
+        const selectFilterWrapperMap = {
+            ingredients: this.$selectedFilterIngredient,
+            appliance: this.$selectedFilterAppliance,
+            ustensils: this.$selectedFilterUstensils
+        };
+        console.log("category", category)
+        console.log("item", item)
+
+        selectFilterWrapperMap[category].push(item)
+        console.log("this.$selectedFilterUstensils", this.$selectedFilterUstensils)
+        console.log("this.$selectedFilterAppliance", this.$selectedFilterAppliance)
+        console.log("this.$selectedFilterIngredient", this.$selectedFilterIngredient)
+
+        const query = this.$searchFormWrapper.value;
+
+        // Exécuter la recherche avec les filtres mis à jour
+        this.search(query, isFiltered);
+    }
+
+
+    search(query, isFiltered) {
         let SearchedRecipes = null
 
         SearchedRecipes = this.Recipes.filter((Recipe) =>
             Recipe.name.toLowerCase().includes(query.toLowerCase()) ||
             Recipe.description.toLowerCase().includes(query.toLowerCase()) ||
             this.listIngredient(Recipe, query.toLowerCase())
-
         )
 
-        this.displayRecipes(SearchedRecipes)
+        this.filterSearch(SearchedRecipes, isFiltered)
+    }
+
+    filterSearch(searchedRecipes, isFiltered) {
+        let filterSearchedRecipes = null;
+        console.log("searchedRecipes", searchedRecipes)
+        filterSearchedRecipes = searchedRecipes.filter((Recipe) =>
+            this.$selectedFilterAppliance.every((appliance) =>
+                Recipe.appliance.toLowerCase().includes(appliance.toLowerCase())
+            ) &&
+            this.$selectedFilterIngredient.every((ingredient) =>
+                Recipe.ingredients.some((item) =>
+                    item.ingredient.toLowerCase().includes(ingredient.toLowerCase())
+                )
+            ) &&
+            this.$selectedFilterUstensils.every((ustensil) =>
+                Recipe.ustensils.some((item) =>
+                    item.toLowerCase().includes(ustensil.toLowerCase())
+                ))
+        );
+        console.log("filterSearchedRecipes", filterSearchedRecipes)
+        this.displayRecipes(filterSearchedRecipes, isFiltered);
     }
 
     listIngredient(Recipe, query) {
@@ -28,20 +73,25 @@ class MainSearch {
         );
     }
 
-    clearRecipesWrapper() {
+    displayRecipes(Recipes, isFiltered) {
         this.$recipesWrapper.innerHTML = ""
-        this.$listIngredientWrapper.innerHTML = ""
-        this.$listApplianceWrapper.innerHTML = ""
-        this.$listUstensilsWrapper.innerHTML = ""
-    }
-
-    displayRecipes(Recipes) {
-        this.clearRecipesWrapper()
 
         Recipes.forEach(Recipe => {
             const Template = new RecipeCard(Recipe)
             this.$recipesWrapper.appendChild(Template.createRecipeCard())
         })
+        console.log("recipezs display", Recipes)
+
+        if (!isFiltered) {
+            this.displayMenu(Recipes)
+        }
+
+    }
+
+    displayMenu(Recipes) {
+        this.$listIngredientWrapper.innerHTML = ""
+        this.$listApplianceWrapper.innerHTML = ""
+        this.$listUstensilsWrapper.innerHTML = ""
 
         const MenuList = new Menu(Recipes, 'ingredients');
         MenuList.insertMenuList();
@@ -51,6 +101,7 @@ class MainSearch {
 
         const MenuListUstensils = new Menu(Recipes, 'ustensils');
         MenuListUstensils.insertMenuList();
+
 
     }
 

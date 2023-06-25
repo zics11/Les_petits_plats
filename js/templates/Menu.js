@@ -55,15 +55,21 @@ class Menu {
     selectItem() {
         const menuItems = this.$wrapper.querySelectorAll('li');
         const than = this; // Pour référencer l'instance de Menu à l'intérieur de la fonction de rappel
+        const mainSearch = new MainSearch(this._recipes);
 
         menuItems.forEach((item) => {
             item.addEventListener('click', () => {
+                const category = item.className; // Récupérer la catégorie du menu
+                const isFiltered = true
                 than.moveItemToSelected(item);
+                mainSearch.updateFilters(category, item.textContent, isFiltered);
             });
         });
+
     }
 
     moveItemToSelected(item) {
+        console.log("item menu", item)
         item.remove();
 
         const listhWrapperMap = {
@@ -154,7 +160,7 @@ class Menu {
         const filteredItems = this.list(query);
 
         const MenuList = filteredItems
-            .map((item) => `<li>${item}</li>`)
+            .map((item) => `<li class="${this._property}">${item}</li>`)
             .join('');
 
         this.$wrapper.innerHTML = MenuList;
