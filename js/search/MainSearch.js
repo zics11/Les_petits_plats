@@ -13,7 +13,7 @@ class MainSearch {
 
     }
 
-    updateFilters(category, item, isFiltered) {
+    updateFilters(category, item) {
         const selectFilterWrapperMap = {
             ingredients: this.$selectedFilterIngredient,
             appliance: this.$selectedFilterAppliance,
@@ -30,11 +30,11 @@ class MainSearch {
         const query = this.$searchFormWrapper.value;
 
         // Exécuter la recherche avec les filtres mis à jour
-        this.search(query, isFiltered);
+        this.search(query);
     }
 
 
-    search(query, isFiltered) {
+    search(query) {
         let SearchedRecipes = null
 
         SearchedRecipes = this.Recipes.filter((Recipe) =>
@@ -43,10 +43,10 @@ class MainSearch {
             this.listIngredient(Recipe, query.toLowerCase())
         )
 
-        this.filterSearch(SearchedRecipes, isFiltered)
+        this.filterSearch(SearchedRecipes)
     }
 
-    filterSearch(searchedRecipes, isFiltered) {
+    filterSearch(searchedRecipes) {
         let filterSearchedRecipes = null;
         console.log("searchedRecipes", searchedRecipes)
         filterSearchedRecipes = searchedRecipes.filter((Recipe) =>
@@ -64,7 +64,7 @@ class MainSearch {
                 ))
         );
         console.log("filterSearchedRecipes", filterSearchedRecipes)
-        this.displayRecipes(filterSearchedRecipes, isFiltered);
+        this.displayRecipes(filterSearchedRecipes);
     }
 
     listIngredient(Recipe, query) {
@@ -73,7 +73,7 @@ class MainSearch {
         );
     }
 
-    displayRecipes(Recipes, isFiltered) {
+    displayRecipes(Recipes) {
         this.$recipesWrapper.innerHTML = ""
 
         Recipes.forEach(Recipe => {
@@ -82,7 +82,7 @@ class MainSearch {
         })
         console.log("recipezs display", Recipes)
 
-        if (!isFiltered) {
+        if (this.$selectedFilterIngredient.length===0 && this.$selectedFilterAppliance.length===0 && this.$selectedFilterUstensils.length===0) {
             this.displayMenu(Recipes)
         }
 

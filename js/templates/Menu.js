@@ -60,9 +60,8 @@ class Menu {
         menuItems.forEach((item) => {
             item.addEventListener('click', () => {
                 const category = item.className; // Récupérer la catégorie du menu
-                const isFiltered = true
                 than.moveItemToSelected(item);
-                mainSearch.updateFilters(category, item.textContent, isFiltered);
+                mainSearch.updateFilters(category, item.textContent);
             });
         });
 
