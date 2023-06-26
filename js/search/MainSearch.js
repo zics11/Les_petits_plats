@@ -13,28 +13,10 @@ class MainSearch {
 
     }
 
-    updateFilters(category, item) {
-        const selectFilterWrapperMap = {
-            ingredients: this.$selectedFilterIngredient,
-            appliance: this.$selectedFilterAppliance,
-            ustensils: this.$selectedFilterUstensils
-        };
-        console.log("category", category)
-        console.log("item", item)
-
-        selectFilterWrapperMap[category].push(item)
-        console.log("this.$selectedFilterUstensils", this.$selectedFilterUstensils)
-        console.log("this.$selectedFilterAppliance", this.$selectedFilterAppliance)
-        console.log("this.$selectedFilterIngredient", this.$selectedFilterIngredient)
-
-        const query = this.$searchFormWrapper.value;
-
-        // Exécuter la recherche avec les filtres mis à jour
-        this.search(query);
-    }
 
 
-    search(query) {
+
+    search(query = this.$searchFormWrapper.value) {
         let SearchedRecipes = null
 
         SearchedRecipes = this.Recipes.filter((Recipe) =>
@@ -48,7 +30,10 @@ class MainSearch {
 
     filterSearch(searchedRecipes) {
         let filterSearchedRecipes = null;
+        this.updateFilters()
         console.log("searchedRecipes", searchedRecipes)
+
+        console.log("$selectedFilterIngredient", this.$selectedFilterIngredient)
         filterSearchedRecipes = searchedRecipes.filter((Recipe) =>
             this.$selectedFilterAppliance.every((appliance) =>
                 Recipe.appliance.toLowerCase().includes(appliance.toLowerCase())
@@ -67,6 +52,14 @@ class MainSearch {
         this.displayRecipes(filterSearchedRecipes);
     }
 
+    updateFilters() {
+
+        const listLabelSearch = document.querySelector('#list_label-search');
+        this.$selectedFilterIngredient = Array.from(listLabelSearch.querySelectorAll('.ingredients')).map(element => element.textContent);
+        this.$selectedFilterAppliance = Array.from(listLabelSearch.querySelectorAll('.appliance')).map(element => element.textContent);
+        this.$selectedFilterUstensils = Array.from(listLabelSearch.querySelectorAll('.ustensils')).map(element => element.textContent);
+    }
+
     listIngredient(Recipe, query) {
         return Recipe.ingredients.some((ingredient) =>
             ingredient.ingredient.toLowerCase().includes(query)
@@ -80,11 +73,7 @@ class MainSearch {
             const Template = new RecipeCard(Recipe)
             this.$recipesWrapper.appendChild(Template.createRecipeCard())
         })
-        console.log("recipezs display", Recipes)
-
-        if (this.$selectedFilterIngredient.length===0 && this.$selectedFilterAppliance.length===0 && this.$selectedFilterUstensils.length===0) {
             this.displayMenu(Recipes)
-        }
 
     }
 

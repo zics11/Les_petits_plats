@@ -19,7 +19,6 @@ class Menu {
         this.$labelSearchWrapper = document.querySelector('#list_label-search');
 
 
-
     }
 
     toggleMenu() {
@@ -59,9 +58,8 @@ class Menu {
 
         menuItems.forEach((item) => {
             item.addEventListener('click', () => {
-                const category = item.className; // Récupérer la catégorie du menu
                 than.moveItemToSelected(item);
-                mainSearch.updateFilters(category, item.textContent);
+                mainSearch.search();
             });
         });
 
@@ -82,6 +80,8 @@ class Menu {
 
         selectedItem.textContent = item.textContent;
         selectedItemClone.textContent = item.textContent;
+        selectedItemClone.classList.add(`${this._property}`)
+
 
 
         selectedItem.addEventListener('click', () => {
@@ -101,12 +101,8 @@ class Menu {
         const itemText = selectedItem.textContent;
         selectedItem.remove();
         selectedItemClone.remove();
-
-        const menuWrapperMap = {
-            ingredients: this.$menuIngredientWrapper,
-            appliance: this.$menuApplianceWrapper,
-            ustensils: this.$menuUstensilsWrapper
-        };
+        const mainSearch = new MainSearch(this._recipes);
+        mainSearch.search();
 
         const listWrapperMap = {
             ingredients: this.$listIngredientWrapper,
