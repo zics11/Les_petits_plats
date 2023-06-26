@@ -17,7 +17,10 @@ class Menu {
         this.$selectedUstensilsWrapper = document.querySelector('#item-selected-ustensiles');
         this.$itemSelectedWrapper = document.querySelector('#item-selected');
         this.$labelSearchWrapper = document.querySelector('#list_label-search');
-
+        this.$blockMenu1 = document.querySelectorAll('.menu');
+        this.$selectedFilterIngredient = []
+        this.$selectedFilterAppliance = []
+        this.$selectedFilterUstensils = []
 
     }
 
@@ -36,20 +39,24 @@ class Menu {
             ustensils: this.$menuUstensilsWrapper
         };
 
-        buttonWrapperMap[this._property].addEventListener('click', () => {
-            isOpen = !isOpen; // Inversion de l'état du menu
+        const openMenu = () => {
+            isOpen = true;
+            menuWrapperMap[this._property].style.display = 'block';
+            buttonWrapperMap[this._property].classList.remove('open');
+        };
 
-            if (isOpen) {
-                menuWrapperMap[this._property].style.display = 'block'; // Ouverture du menu
-                buttonWrapperMap[this._property].classList.remove('open')
+        const closeMenu = () => {
+            isOpen = false;
+            menuWrapperMap[this._property].style.display = 'none';
+            buttonWrapperMap[this._property].classList.add('open');
+        };
 
-            } else {
-                menuWrapperMap[this._property].style.display = 'none'; // Fermeture du menu
-                buttonWrapperMap[this._property].classList.add('open')
-
-            }
-        });
+        buttonWrapperMap[this._property].addEventListener('mouseover', openMenu);
+        buttonWrapperMap[this._property].addEventListener('mouseout', closeMenu);
+        menuWrapperMap[this._property].addEventListener('mouseover', openMenu);
+        menuWrapperMap[this._property].addEventListener('mouseout', closeMenu);
     }
+
 
     selectItem() {
         const menuItems = this.$wrapper.querySelectorAll('li');
@@ -122,25 +129,47 @@ class Menu {
         listWrapperMap[this._property].appendChild(listItem);
     }
 
+    updateFilters() {
 
+        const listLabelSearch = document.querySelector('#list_label-search');
+        this.$selectedFilterIngredient = Array.from(listLabelSearch.querySelectorAll('.ingredients')).map(element => element.textContent);
+        this.$selectedFilterAppliance = Array.from(listLabelSearch.querySelectorAll('.appliance')).map(element => element.textContent);
+        this.$selectedFilterUstensils = Array.from(listLabelSearch.querySelectorAll('.ustensils')).map(element => element.textContent);
+    }
 
     list() {
         const allItem = new Set();
+        this.updateFilters()
 
         this._recipes.forEach((recipe) => {
             if (this._property === 'ingredients') {
                 recipe.ingredients.forEach((ingredientObj) => {
-                    if (ingredientObj.ingredient.toLowerCase().includes(this.query.toLowerCase())) {
+                    if (
+                        ingredientObj.ingredient.toLowerCase().includes(this.query.toLowerCase()) &&
+                        this.$selectedFilterIngredient.every((filter) =>
+                            !ingredientObj.ingredient.toLowerCase().includes(filter.toLowerCase())
+                        )
+                    ) {
                         allItem.add(ingredientObj.ingredient);
                     }
                 });
             } else if (this._property === 'appliance') {
-                if (recipe.appliance.toLowerCase().includes(this.query.toLowerCase())) {
+                if (
+                    recipe.appliance.toLowerCase().includes(this.query.toLowerCase()) &&
+                    this.$selectedFilterAppliance.every((filter) =>
+                        !recipe.appliance.toLowerCase().includes(filter.toLowerCase())
+                    )
+                ) {
                     allItem.add(recipe.appliance);
                 }
             } else if (this._property === 'ustensils') {
                 recipe.ustensils.forEach((ustensil) => {
-                    if (ustensil.toLowerCase().includes(this.query.toLowerCase())) {
+                    if (
+                        ustensil.toLowerCase().includes(this.query.toLowerCase()) &&
+                        this.$selectedFilterUstensils.every((filter) =>
+                            !ustensil.toLowerCase().includes(filter.toLowerCase())
+                        )
+                    ) {
                         allItem.add(ustensil);
                     }
                 });

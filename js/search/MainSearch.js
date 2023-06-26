@@ -9,11 +9,8 @@ class MainSearch {
         this.$selectedFilterIngredient = []
         this.$selectedFilterAppliance = []
         this.$selectedFilterUstensils = []
-
-
+        this.$messageWrapper = document.querySelector('#no-recipes')
     }
-
-
 
 
     search(query = this.$searchFormWrapper.value) {
@@ -25,7 +22,13 @@ class MainSearch {
             this.listIngredient(Recipe, query.toLowerCase())
         )
 
-        this.filterSearch(SearchedRecipes)
+        if (SearchedRecipes.length === 0) {
+            this.noRecipesMessage()
+            this.filterSearch(SearchedRecipes)
+        } else {
+            this.$messageWrapper.innerHTML = ''
+            this.filterSearch(SearchedRecipes)
+        }
     }
 
     filterSearch(searchedRecipes) {
@@ -69,11 +72,12 @@ class MainSearch {
     displayRecipes(Recipes) {
         this.$recipesWrapper.innerHTML = ""
 
+
         Recipes.forEach(Recipe => {
             const Template = new RecipeCard(Recipe)
             this.$recipesWrapper.appendChild(Template.createRecipeCard())
         })
-            this.displayMenu(Recipes)
+        this.displayMenu(Recipes)
 
     }
 
@@ -104,6 +108,16 @@ class MainSearch {
                     this.displayRecipes(this.Recipes)
                 }
             })
+    }
+
+    noRecipesMessage() {
+        const message = `
+        <p>Aucune recette ne contient <span>${this.$searchFormWrapper.value}</span> vous pouvez chercher « tarte aux pommes », « poisson », etc ...
+    </p>
+    `
+        this.$messageWrapper.innerHTML = ''
+        this.$messageWrapper.innerHTML = message
+
     }
 
 }

@@ -344,3 +344,14 @@ main {
     color: black;
     margin-bottom: 3px;
 }
+
+#no-recipes{
+    margin-top: 40px;
+    text-align: center;
+    font-family: 'Anton', sans-serif;
+    font-size: 25px;
+}
+
+#no-recipes span{
+color: #d69901;
+}
