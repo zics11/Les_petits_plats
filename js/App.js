@@ -19,6 +19,7 @@ class App {
 
     const Search = new MainSearch(this.Recipes)
     Search.onSearch()
+    Search.countRecipes(this.Recipes)
 
     const menuSearchIngredient = new MenuSearch(this.Recipes, 'ingredients')
     menuSearchIngredient.onSearch()

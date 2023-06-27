@@ -100,12 +100,12 @@ main {
     display: flex;
     width: 100%;
     flex-wrap: wrap;
+    justify-content: space-between;
 
 }
 
 .menu {
     position: relative;
-    margin-right: 66px;
 }
 
 .btn {
@@ -229,6 +229,14 @@ main {
 
 }
 
+#count-recipes {
+    width: 36%;
+    text-align: right;
+    line-height: 56px;
+    font-family: 'Anton', sans-serif;
+    font-size: 21px;
+}
+
 
 #list_label-search {
     display: flex;
@@ -345,13 +353,13 @@ main {
     margin-bottom: 3px;
 }
 
-#no-recipes{
+#no-recipes {
     margin-top: 40px;
     text-align: center;
     font-family: 'Anton', sans-serif;
     font-size: 25px;
 }
 
-#no-recipes span{
-color: #d69901;
+#no-recipes span {
+    color: #d69901;
 }

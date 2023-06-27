@@ -10,6 +10,7 @@ class MainSearch {
         this.$selectedFilterAppliance = []
         this.$selectedFilterUstensils = []
         this.$messageWrapper = document.querySelector('#no-recipes')
+        this.$countRecipesWrapper = document.querySelector('#count-recipes')
     }
 
 
@@ -71,7 +72,7 @@ class MainSearch {
 
     displayRecipes(Recipes) {
         this.$recipesWrapper.innerHTML = ""
-
+        this.countRecipes(Recipes)
 
         Recipes.forEach(Recipe => {
             const Template = new RecipeCard(Recipe)
@@ -119,5 +120,14 @@ class MainSearch {
         this.$messageWrapper.innerHTML = message
 
     }
+
+    countRecipes(recipes) {
+        const countRecipe = recipes.length
+        const message = `<p>${countRecipe} recettes</p>`
+        this.$countRecipesWrapper.innerHTML = ''
+        this.$countRecipesWrapper.innerHTML = message
+
+    }
+
 
 }
