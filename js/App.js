@@ -2,7 +2,7 @@
 class App {
   constructor() {
     this.$recipesWrapper = document.querySelector('.recipes-wrapper')
-    this.dataUrl = './data/recipes.json'
+    this.dataUrl = '/data/recipes.json'
     this.Recipes = []
   }
 
