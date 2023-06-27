@@ -13,7 +13,7 @@ class MainSearch {
         this.$countRecipesWrapper = document.querySelector('#count-recipes')
     }
 
-
+    // filtre les recettes par rapport a la saisie dans le champ de recherche
     search(query = this.$searchFormWrapper.value) {
         let SearchedRecipes = null
 
@@ -32,6 +32,7 @@ class MainSearch {
         }
     }
 
+    //filtre les recette par rapport au tag selectioné  
     filterSearch(searchedRecipes) {
         this.updateFilters()
 
@@ -55,6 +56,7 @@ class MainSearch {
         this.displayRecipes(filterSearchedRecipes);
     }
 
+    // Met à jour les variables des filtre en allan chercher dans #list_label-search
     updateFilters() {
         const listLabelSearch = document.querySelector('#list_label-search');
 
@@ -67,12 +69,14 @@ class MainSearch {
         console.log("this.$selectedFilterUstensils", this.$selectedFilterUstensils)
     }
 
+    // retourne la liste des ingrédients par par rapport au recettes affichés
     listIngredient(Recipe, query) {
         return Recipe.ingredients.some((ingredient) =>
             ingredient.ingredient.toLowerCase().includes(query)
         );
     }
 
+    // affiche les recettes
     displayRecipes(Recipes) {
         this.$recipesWrapper.innerHTML = ""
         this.countRecipes(Recipes)
@@ -85,6 +89,7 @@ class MainSearch {
         this.displayMenu(Recipes)
     }
 
+    // affiche les listes des menus
     displayMenu(Recipes) {
         this.$listIngredientWrapper.innerHTML = ""
         this.$listApplianceWrapper.innerHTML = ""
@@ -99,7 +104,7 @@ class MainSearch {
         const MenuListUstensils = new Menu(Recipes, 'ustensils');
         MenuListUstensils.insertMenuList();
     }
-
+    // déclenche la recherche quant une saisie est faite dans le champ de recherche
     onSearch() {
         this.$searchFormWrapper
             .addEventListener('keyup', e => {
@@ -112,6 +117,7 @@ class MainSearch {
             })
     }
 
+    // affiche un message si aucune recette n'est trouvé
     noRecipesMessage() {
         const message = `
         <p>Aucune recette ne contient <span>${this.$searchFormWrapper.value}</span> vous pouvez chercher « tarte aux pommes », « poisson », etc ...
@@ -120,7 +126,7 @@ class MainSearch {
         this.$messageWrapper.innerHTML = ''
         this.$messageWrapper.innerHTML = message
     }
-
+    // compte le nombre de recette affiché
     countRecipes(recipes) {
         const countRecipe = recipes.length
         const message = `<p>${countRecipe} recettes</p>`

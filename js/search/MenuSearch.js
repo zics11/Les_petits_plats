@@ -11,6 +11,7 @@ class MenuSearch {
         this.$listUstensilsWrapper = document.querySelector('#list-ustensiles');
     }
 
+    //  effectuer une recherche dans chaque liste des menu
     search(query) {
         let SearchedItem = null;
 
@@ -20,7 +21,7 @@ class MenuSearch {
 
         this.displayList(SearchedItem, query);
     }
-
+    // renvoie la liste filtré
     listItem(Recipe, query) {
         if (this.Property === 'ingredients') {
             return Recipe.ingredients.some((ingredient) =>
@@ -34,7 +35,7 @@ class MenuSearch {
             );
         }
     }
-
+    // vide le wrapper de chaque liste
     clearListWrapper() {
         const listhWrapperMap = {
             ingredients: this.$listIngredientWrapper,
@@ -44,14 +45,14 @@ class MenuSearch {
 
         listhWrapperMap[this.Property].innerHTML = "";
     }
-
+    // affiche la liste dans le menu en appelant insertMenuList dans la class menu
     displayList(Recipes, query) {
         this.clearListWrapper();
 
         const MenuList = new Menu(Recipes, this.Property);
         MenuList.insertMenuList(query);
     }
-
+    // gere le declenchement de la recherche
     onSearch() {
         const searchWrapperMap = {
             ingredients: this.$searchImputIngredientWrapper,

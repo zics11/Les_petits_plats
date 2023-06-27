@@ -23,8 +23,9 @@ class Menu {
         this.$selectedFilterUstensils = []
     }
 
+    // Gère l'ouverture/fermeture du menu
     toggleMenu() {
-        let isOpen = false; 
+        let isOpen = false;
 
         const buttonWrapperMap = {
             ingredients: this.$butttonIngredientWrapper,
@@ -54,6 +55,7 @@ class Menu {
         menuWrapperMap[this._property].addEventListener('mouseout', closeMenu);
     }
 
+    // gére la Sélection d'un élément du menu et appeller la fonction search et moveitem
     selectItem() {
         const menuItems = this.$wrapper.querySelectorAll('li');
         const than = this; // Pour référencer l'instance de Menu à l'intérieur de la fonction de rappel
@@ -68,6 +70,7 @@ class Menu {
         });
     }
 
+    // Déplace un élément sélectionné vers la liste des éléments sélectionnés
     moveItemToSelected(item) {
         item.remove();
 
@@ -94,6 +97,7 @@ class Menu {
 
     }
 
+    // Supprime un élément sélectionné de la liste des éléments sélectionnés
     removeSelectedItem(selectedItem, selectedItemClone) {
         selectedItem.remove();
         selectedItemClone.remove();
@@ -117,6 +121,7 @@ class Menu {
         listWrapperMap[this._property].appendChild(listItem);
     }
 
+    // Met à jour les variables des filtre en allan chercher dans #list_label-search
     updateFilters() {
         const listLabelSearch = document.querySelector('#list_label-search');
 
@@ -125,6 +130,7 @@ class Menu {
         this.$selectedFilterUstensils = Array.from(listLabelSearch.querySelectorAll('.ustensils')).map(element => element.textContent);
     }
 
+    // Renvoie la liste des item a affiché dans les menu par rapoort au recette affiché
     list() {
         this.updateFilters()
 
@@ -168,6 +174,7 @@ class Menu {
         return Array.from(allItem);
     }
 
+    // Insère la liste d'éléments dans le menu
     insertMenuList(query = '') {
         this.query = query;
         const filteredItems = this.list(query);
@@ -188,7 +195,7 @@ class Menu {
             this.$listUstensilsWrapper.innerHTML = '';
             this.$listUstensilsWrapper.appendChild(this.$wrapper);
         }
-        this.selectItem(); // Ajouter les événements de clic aux éléments de la liste
+        this.selectItem();
 
         return this.$wrapper;
     }
