@@ -10,17 +10,21 @@ class App {
     const response = await fetch(this.dataUrl);
     const data = await response.json();
     const recipesData = data.recipes;
+
     this.Recipes = recipesData.map(recipeData => new modelsRecipe(recipeData));
+
     return this.Recipes
   }
 
   async main() {
     await this.getRecipes()
 
+    // Crée une instance de MainSearch en lui passant les recettes
     const Search = new MainSearch(this.Recipes)
     Search.onSearch()
     Search.countRecipes(this.Recipes)
 
+    // Crée une instance de MenuSearch pour la recherche par ingrédients, appliance et ustensiles
     const menuSearchIngredient = new MenuSearch(this.Recipes, 'ingredients')
     menuSearchIngredient.onSearch()
 
@@ -30,6 +34,7 @@ class App {
     const menuSearchUstensils = new MenuSearch(this.Recipes, 'ustensils')
     menuSearchUstensils.onSearch()
 
+    // Parcourt les recettes et crée une instance de RecipeCard pour chaque recette
     this.Recipes.forEach(recipe => {
       const Template = new RecipeCard(recipe)
       this.$recipesWrapper.appendChild(
@@ -37,6 +42,7 @@ class App {
       )
     })
 
+    // Crée une instance de Menu ingredients, appliance et ustensils
     const MenuListIngredient = new Menu(this.Recipes, 'ingredients');
     MenuListIngredient.insertMenuList();
     MenuListIngredient.toggleMenu();
@@ -48,13 +54,8 @@ class App {
     const MenuListUstensils = new Menu(this.Recipes, 'ustensils');
     MenuListUstensils.insertMenuList();
     MenuListUstensils.toggleMenu();
-
   }
-
 }
 
 const app = new App()
-
 app.main()
-
-console.log('main', app.getRecipes())

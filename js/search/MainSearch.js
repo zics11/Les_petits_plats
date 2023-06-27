@@ -33,11 +33,10 @@ class MainSearch {
     }
 
     filterSearch(searchedRecipes) {
-        let filterSearchedRecipes = null;
         this.updateFilters()
-        console.log("searchedRecipes", searchedRecipes)
 
-        console.log("$selectedFilterIngredient", this.$selectedFilterIngredient)
+        let filterSearchedRecipes = null;
+
         filterSearchedRecipes = searchedRecipes.filter((Recipe) =>
             this.$selectedFilterAppliance.every((appliance) =>
                 Recipe.appliance.toLowerCase().includes(appliance.toLowerCase())
@@ -52,16 +51,20 @@ class MainSearch {
                     item.toLowerCase().includes(ustensil.toLowerCase())
                 ))
         );
-        console.log("filterSearchedRecipes", filterSearchedRecipes)
+
         this.displayRecipes(filterSearchedRecipes);
     }
 
     updateFilters() {
-
         const listLabelSearch = document.querySelector('#list_label-search');
+
         this.$selectedFilterIngredient = Array.from(listLabelSearch.querySelectorAll('.ingredients')).map(element => element.textContent);
         this.$selectedFilterAppliance = Array.from(listLabelSearch.querySelectorAll('.appliance')).map(element => element.textContent);
         this.$selectedFilterUstensils = Array.from(listLabelSearch.querySelectorAll('.ustensils')).map(element => element.textContent);
+
+        console.log("this.$selectedFilterIngredient", this.$selectedFilterIngredient)
+        console.log("this.$selectedFilterAppliance", this.$selectedFilterAppliance)
+        console.log("this.$selectedFilterUstensils", this.$selectedFilterUstensils)
     }
 
     listIngredient(Recipe, query) {
@@ -78,8 +81,8 @@ class MainSearch {
             const Template = new RecipeCard(Recipe)
             this.$recipesWrapper.appendChild(Template.createRecipeCard())
         })
-        this.displayMenu(Recipes)
 
+        this.displayMenu(Recipes)
     }
 
     displayMenu(Recipes) {
@@ -95,8 +98,6 @@ class MainSearch {
 
         const MenuListUstensils = new Menu(Recipes, 'ustensils');
         MenuListUstensils.insertMenuList();
-
-
     }
 
     onSearch() {
@@ -118,16 +119,13 @@ class MainSearch {
     `
         this.$messageWrapper.innerHTML = ''
         this.$messageWrapper.innerHTML = message
-
     }
 
     countRecipes(recipes) {
         const countRecipe = recipes.length
         const message = `<p>${countRecipe} recettes</p>`
+
         this.$countRecipesWrapper.innerHTML = ''
         this.$countRecipesWrapper.innerHTML = message
-
     }
-
-
 }

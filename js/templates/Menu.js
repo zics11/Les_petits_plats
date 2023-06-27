@@ -21,18 +21,16 @@ class Menu {
         this.$selectedFilterIngredient = []
         this.$selectedFilterAppliance = []
         this.$selectedFilterUstensils = []
-
     }
 
     toggleMenu() {
-        let isOpen = false; // Variable de statut pour suivre l'état du menu
+        let isOpen = false; 
 
         const buttonWrapperMap = {
             ingredients: this.$butttonIngredientWrapper,
             appliance: this.$butttontApplianceWrapper,
             ustensils: this.$butttonUstensilsWrapper
         };
-
         const menuWrapperMap = {
             ingredients: this.$menuIngredientWrapper,
             appliance: this.$menuApplianceWrapper,
@@ -44,7 +42,6 @@ class Menu {
             menuWrapperMap[this._property].style.display = 'block';
             buttonWrapperMap[this._property].classList.remove('open');
         };
-
         const closeMenu = () => {
             isOpen = false;
             menuWrapperMap[this._property].style.display = 'none';
@@ -57,10 +54,10 @@ class Menu {
         menuWrapperMap[this._property].addEventListener('mouseout', closeMenu);
     }
 
-
     selectItem() {
         const menuItems = this.$wrapper.querySelectorAll('li');
         const than = this; // Pour référencer l'instance de Menu à l'intérieur de la fonction de rappel
+
         const mainSearch = new MainSearch(this._recipes);
 
         menuItems.forEach((item) => {
@@ -69,11 +66,9 @@ class Menu {
                 mainSearch.search();
             });
         });
-
     }
 
     moveItemToSelected(item) {
-        console.log("item menu", item)
         item.remove();
 
         const listhWrapperMap = {
@@ -88,26 +83,24 @@ class Menu {
         selectedItem.textContent = item.textContent;
         selectedItemClone.textContent = item.textContent;
         selectedItemClone.classList.add(`${this._property}`)
-
-
-
         selectedItem.addEventListener('click', () => {
             this.removeSelectedItem(selectedItem, selectedItemClone);
         });
         selectedItemClone.addEventListener('click', () => {
             this.removeSelectedItem(selectedItem, selectedItemClone);
         });
-
-
         listhWrapperMap[this._property].appendChild(selectedItem);
         this.$labelSearchWrapper.appendChild(selectedItemClone);
 
     }
 
     removeSelectedItem(selectedItem, selectedItemClone) {
-        const itemText = selectedItem.textContent;
         selectedItem.remove();
         selectedItemClone.remove();
+
+        const itemText = selectedItem.textContent;
+        const listItem = document.createElement('li');
+
         const mainSearch = new MainSearch(this._recipes);
         mainSearch.search();
 
@@ -117,29 +110,25 @@ class Menu {
             ustensils: this.$listUstensilsWrapper
         };
 
-        // Créer un nouvel élément li pour réinsérer l'élément supprimé dans la liste d'origine
-        const listItem = document.createElement('li');
         listItem.textContent = itemText;
-
-        // Ajouter l'événement de clic pour sélectionner à nouveau l'élément
         listItem.addEventListener('click', () => {
             this.moveItemToSelected(listItem);
         });
-
         listWrapperMap[this._property].appendChild(listItem);
     }
 
     updateFilters() {
-
         const listLabelSearch = document.querySelector('#list_label-search');
+
         this.$selectedFilterIngredient = Array.from(listLabelSearch.querySelectorAll('.ingredients')).map(element => element.textContent);
         this.$selectedFilterAppliance = Array.from(listLabelSearch.querySelectorAll('.appliance')).map(element => element.textContent);
         this.$selectedFilterUstensils = Array.from(listLabelSearch.querySelectorAll('.ustensils')).map(element => element.textContent);
     }
 
     list() {
-        const allItem = new Set();
         this.updateFilters()
+
+        const allItem = new Set();
 
         this._recipes.forEach((recipe) => {
             if (this._property === 'ingredients') {
@@ -200,6 +189,7 @@ class Menu {
             this.$listUstensilsWrapper.appendChild(this.$wrapper);
         }
         this.selectItem(); // Ajouter les événements de clic aux éléments de la liste
+
         return this.$wrapper;
     }
 }

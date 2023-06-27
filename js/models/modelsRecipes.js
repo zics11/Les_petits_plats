@@ -1,5 +1,5 @@
 class modelsRecipe {
-    constructor(recipes){
+    constructor(recipes) {
         this._id = recipes.id
         this._image = recipes.image
         this._name = recipes.name
@@ -8,7 +8,6 @@ class modelsRecipe {
         this._description = recipes.description
         this._appliance = recipes.appliance
         this._ustensils = recipes.ustensils
-
     }
 
     get id() {
@@ -42,6 +41,4 @@ class modelsRecipe {
     get ustensils() {
         return this._ustensils
     }
-
-
 }

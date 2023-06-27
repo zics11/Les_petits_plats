@@ -13,9 +13,11 @@ class MenuSearch {
 
     search(query) {
         let SearchedItem = null;
+
         SearchedItem = this.Recipes.filter((Recipe) =>
             this.listItem(Recipe, query.toLowerCase())
         );
+
         this.displayList(SearchedItem, query);
     }
 
@@ -39,11 +41,13 @@ class MenuSearch {
             appliance: this.$listApplianceWrapper,
             ustensils: this.$listUstensilsWrapper
         };
+
         listhWrapperMap[this.Property].innerHTML = "";
     }
 
     displayList(Recipes, query) {
         this.clearListWrapper();
+
         const MenuList = new Menu(Recipes, this.Property);
         MenuList.insertMenuList(query);
     }
@@ -64,6 +68,4 @@ class MenuSearch {
             }
         });
     }
-
-
 }
