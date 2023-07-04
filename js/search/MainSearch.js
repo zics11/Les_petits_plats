@@ -63,10 +63,6 @@ class MainSearch {
         this.$selectedFilterIngredient = Array.from(listLabelSearch.querySelectorAll('.ingredients')).map(element => element.textContent);
         this.$selectedFilterAppliance = Array.from(listLabelSearch.querySelectorAll('.appliance')).map(element => element.textContent);
         this.$selectedFilterUstensils = Array.from(listLabelSearch.querySelectorAll('.ustensils')).map(element => element.textContent);
-
-        console.log("this.$selectedFilterIngredient", this.$selectedFilterIngredient)
-        console.log("this.$selectedFilterAppliance", this.$selectedFilterAppliance)
-        console.log("this.$selectedFilterUstensils", this.$selectedFilterUstensils)
     }
 
     // retourne la liste des ingrédients par par rapport au recettes affichés

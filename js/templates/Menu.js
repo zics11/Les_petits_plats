@@ -105,8 +105,8 @@ class Menu {
         const itemText = selectedItem.textContent;
         const listItem = document.createElement('li');
 
-        const mainSearch = new MainSearch(this._recipes);
-        mainSearch.search();
+        const initRecipes = new App()
+        initRecipes.initRecipes()
 
         const listWrapperMap = {
             ingredients: this.$listIngredientWrapper,

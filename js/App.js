@@ -55,6 +55,15 @@ class App {
     MenuListUstensils.insertMenuList();
     MenuListUstensils.toggleMenu();
   }
+  async initRecipes() {
+    await this.getRecipes()
+
+    // Crée une instance de MainSearch en lui passant les recettes
+    const Search = new MainSearch(this.Recipes)
+    Search.search()
+  }
+
+
 }
 
 const app = new App()
