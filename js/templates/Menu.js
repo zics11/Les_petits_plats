@@ -179,9 +179,11 @@ class Menu {
         this.query = query;
         const filteredItems = this.list(query);
 
-        const MenuList = filteredItems
-            .map((item) => `<li class="${this._property}">${item}</li>`)
-            .join('');
+        let MenuList = '';
+
+        for (const item of filteredItems) {
+            MenuList += `<li class="${this._property}">${item}</li>`;
+        }
 
         this.$wrapper.innerHTML = MenuList;
 
