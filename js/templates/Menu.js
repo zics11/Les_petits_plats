@@ -62,12 +62,12 @@ class Menu {
 
         const mainSearch = new MainSearch(this._recipes);
 
-        menuItems.forEach((item) => {
+        for (const item of menuItems) {
             item.addEventListener('click', () => {
                 than.moveItemToSelected(item);
                 mainSearch.search();
             });
-        });
+        }
     }
 
     // Déplace un élément sélectionné vers la liste des éléments sélectionnés
