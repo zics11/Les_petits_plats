@@ -68,9 +68,25 @@ class MainSearch {
     updateFilters() {
         const listLabelSearch = document.querySelector('#list_label-search');
 
-        this.$selectedFilterIngredient = Array.from(listLabelSearch.querySelectorAll('.ingredients')).map(element => element.textContent);
-        this.$selectedFilterAppliance = Array.from(listLabelSearch.querySelectorAll('.appliance')).map(element => element.textContent);
-        this.$selectedFilterUstensils = Array.from(listLabelSearch.querySelectorAll('.ustensils')).map(element => element.textContent);
+
+        this.$selectedFilterIngredient = [];
+        this.$selectedFilterAppliance = [];
+        this.$selectedFilterUstensils = [];
+
+        const ingredients = listLabelSearch.querySelectorAll('.ingredients');
+        for (const ingredient of ingredients) {
+            this.$selectedFilterIngredient.push(ingredient.textContent);
+        }
+
+        const appliances = listLabelSearch.querySelectorAll('.appliance');
+        for (const appliance of appliances) {
+            this.$selectedFilterAppliance.push(appliance.textContent);
+        }
+
+        const ustensils = listLabelSearch.querySelectorAll('.ustensils');
+        for (const ustensil of ustensils) {
+            this.$selectedFilterUstensils.push(ustensil.textContent);
+        }
     }
 
     // retourne la liste des ingrédients par par rapport au recettes affichés
