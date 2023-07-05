@@ -42,24 +42,54 @@ class MainSearch {
 
     //filtre les recette par rapport au tag selectioné  
     filterSearch(searchedRecipes) {
-        this.updateFilters()
+        this.updateFilters();
 
-        let filterSearchedRecipes = null;
+        let filterSearchedRecipes = [];
 
-        filterSearchedRecipes = searchedRecipes.filter((Recipe) =>
-            this.$selectedFilterAppliance.every((appliance) =>
-                Recipe.appliance.toLowerCase().includes(appliance.toLowerCase())
-            ) &&
-            this.$selectedFilterIngredient.every((ingredient) =>
-                Recipe.ingredients.some((item) =>
-                    item.ingredient.toLowerCase().includes(ingredient.toLowerCase())
-                )
-            ) &&
-            this.$selectedFilterUstensils.every((ustensil) =>
-                Recipe.ustensils.some((item) =>
-                    item.toLowerCase().includes(ustensil.toLowerCase())
-                ))
-        );
+        for (const Recipe of searchedRecipes) {
+            let hasAppliance = true;
+            let hasAllIngredients = true;
+            let hasUstensil = true;
+
+            for (const appliance of this.$selectedFilterAppliance) {
+                if (!Recipe.appliance.toLowerCase().includes(appliance.toLowerCase())) {
+                    hasAppliance = false;
+                    break;
+                }
+            }
+
+            for (const ingredient of this.$selectedFilterIngredient) {
+                let ingredientFound = false;
+                for (const item of Recipe.ingredients) {
+                    if (item.ingredient.toLowerCase().includes(ingredient.toLowerCase())) {
+                        ingredientFound = true;
+                        break;
+                    }
+                }
+                if (!ingredientFound) {
+                    hasAllIngredients = false;
+                    break;
+                }
+            }
+
+            for (const ustensil of this.$selectedFilterUstensils) {
+                let ustensilFound = false;
+                for (const item of Recipe.ustensils) {
+                    if (item.toLowerCase().includes(ustensil.toLowerCase())) {
+                        ustensilFound = true;
+                        break;
+                    }
+                }
+                if (!ustensilFound) {
+                    hasUstensil = false;
+                    break;
+                }
+            }
+
+            if (hasAppliance && hasAllIngredients && hasUstensil) {
+                filterSearchedRecipes.push(Recipe);
+            }
+        }
 
         this.displayRecipes(filterSearchedRecipes);
     }
