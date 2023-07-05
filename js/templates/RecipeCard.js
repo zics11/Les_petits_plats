@@ -10,7 +10,9 @@ class RecipeCard {
     }
 
     createRecipeCard() {
-        const ingredientsList = this._recipe.ingredients.map(ingredient => {
+        let ingredientsList = '';
+        for (let i = 0; i < this._recipe.ingredients.length; i++) {
+            const ingredient = this._recipe.ingredients[i];
             let ingredientString = `<div class="ingredient"><h4>${ingredient.ingredient}</h4>`;
             if (ingredient.quantity) {
                 ingredientString += `<p>${ingredient.quantity}`;
@@ -20,8 +22,8 @@ class RecipeCard {
                 ingredientString += `</p>`;
             }
             ingredientString += `</div>`;
-            return ingredientString;
-        }).join('');
+            ingredientsList += ingredientString;
+        }
 
         const recipeCard = `
             <img src="${this._recipe.image}" />
@@ -39,9 +41,10 @@ class RecipeCard {
                     ${ingredientsList}
                 </div>
             </div>
-        `
-        this.$wrapper.innerHTML = recipeCard
+        `;
 
-        return this.$wrapper
+        this.$wrapper.innerHTML = recipeCard;
+
+        return this.$wrapper;
     }
 }
