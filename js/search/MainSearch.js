@@ -108,7 +108,7 @@ class MainSearch {
                 if (query.length >= 3) {
                     this.search(query)
                 } else if (query.length === 0) {
-                    this.displayRecipes(this.Recipes)
+                    this.filterSearch(this.Recipes)
                 }
             })
     }
