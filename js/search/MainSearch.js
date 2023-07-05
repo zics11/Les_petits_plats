@@ -15,20 +15,28 @@ class MainSearch {
 
     // filtre les recettes par rapport a la saisie dans le champ de recherche
     search(query = this.$searchFormWrapper.value) {
-        let SearchedRecipes = null
+        let searchedRecipes = [];
 
-        SearchedRecipes = this.Recipes.filter((Recipe) =>
-            Recipe.name.toLowerCase().includes(query.toLowerCase()) ||
-            Recipe.description.toLowerCase().includes(query.toLowerCase()) ||
-            this.listIngredient(Recipe, query.toLowerCase())
-        )
+        for (const Recipe of this.Recipes) {
+            const lowerCaseQuery = query.toLowerCase();
+            const recipeName = Recipe.name.toLowerCase();
+            const recipeDescription = Recipe.description.toLowerCase();
 
-        if (SearchedRecipes.length === 0) {
-            this.noRecipesMessage()
-            this.filterSearch(SearchedRecipes)
+            if (
+                recipeName.includes(lowerCaseQuery) ||
+                recipeDescription.includes(lowerCaseQuery) ||
+                this.listIngredient(Recipe, lowerCaseQuery)
+            ) {
+                searchedRecipes.push(Recipe);
+            }
+        }
+
+        if (searchedRecipes.length === 0) {
+            this.noRecipesMessage();
+            this.filterSearch(searchedRecipes);
         } else {
-            this.$messageWrapper.innerHTML = ''
-            this.filterSearch(SearchedRecipes)
+            this.$messageWrapper.innerHTML = '';
+            this.filterSearch(searchedRecipes);
         }
     }
 
