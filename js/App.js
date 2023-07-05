@@ -10,10 +10,14 @@ class App {
     const response = await fetch(this.dataUrl);
     const data = await response.json();
     const recipesData = data.recipes;
+    const recipes = [];
 
-    this.Recipes = recipesData.map(recipeData => new modelsRecipe(recipeData));
+    for (const recipeData of recipesData) {
+      recipes.push(new modelsRecipe(recipeData));
+    }
 
-    return this.Recipes
+    this.Recipes = recipes;
+    return this.Recipes;
   }
 
   async main() {
