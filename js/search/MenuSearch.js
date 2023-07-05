@@ -15,12 +15,16 @@ class MenuSearch {
     search(query) {
         let SearchedItem = null;
 
-        SearchedItem = this.Recipes.filter((Recipe) =>
-            this.listItem(Recipe, query.toLowerCase())
-        );
+        SearchedItem = [];
+        for (const Recipe of this.Recipes) {
+            if (this.listItem(Recipe, query.toLowerCase())) {
+                SearchedItem.push(Recipe);
+            }
+        }
 
         this.displayList(SearchedItem, query);
     }
+
     // renvoie la liste filtré
     listItem(Recipe, query) {
         if (this.Property === 'ingredients') {
