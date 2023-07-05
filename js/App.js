@@ -39,12 +39,11 @@ class App {
     menuSearchUstensils.onSearch()
 
     // Parcourt les recettes et crée une instance de RecipeCard pour chaque recette
-    this.Recipes.forEach(recipe => {
-      const Template = new RecipeCard(recipe)
-      this.$recipesWrapper.appendChild(
-        Template.createRecipeCard()
-      )
-    })
+    for (let i = 0; i < this.Recipes.length; i++) {
+      const recipe = this.Recipes[i];
+      const Template = new RecipeCard(recipe);
+      this.$recipesWrapper.appendChild(Template.createRecipeCard());
+    }
 
     // Crée une instance de Menu ingredients, appliance et ustensils
     const MenuListIngredient = new Menu(this.Recipes, 'ingredients');
