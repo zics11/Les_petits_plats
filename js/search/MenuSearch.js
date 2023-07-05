@@ -69,4 +69,11 @@ class MenuSearch {
             }
         });
     }
+
+    clearImput() {
+        this.$searchImputIngredientWrapper.value = ''
+        this.$searchImputApplianceWrapper.value = ''
+        this.$searchImputUstensilsWrapper.value = ''
+
+    }
 }

@@ -99,6 +99,18 @@ class MainSearch {
 
         const MenuListUstensils = new Menu(Recipes, 'ustensils');
         MenuListUstensils.insertMenuList();
+
+        const menuSearchIngredient = new MenuSearch(Recipes, 'ingredients')
+        menuSearchIngredient.onSearch()
+        menuSearchIngredient.clearImput()
+
+        const menuSearchAppliance = new MenuSearch(Recipes, 'appliance')
+        menuSearchAppliance.onSearch()
+
+
+        const menuSearchUstensils = new MenuSearch(Recipes, 'ustensils')
+        menuSearchUstensils.onSearch()
+
     }
     // déclenche la recherche quant une saisie est faite dans le champ de recherche
     onSearch() {
