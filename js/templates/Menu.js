@@ -132,13 +132,13 @@ class Menu {
 
     // Renvoie la liste des item a affiché dans les menu par rapoort au recette affiché
     list() {
-        this.updateFilters()
+        this.updateFilters();
 
         const allItem = new Set();
 
-        this._recipes.forEach((recipe) => {
+        for (const recipe of this._recipes) {
             if (this._property === 'ingredients') {
-                recipe.ingredients.forEach((ingredientObj) => {
+                for (const ingredientObj of recipe.ingredients) {
                     if (
                         ingredientObj.ingredient.toLowerCase().includes(this.query.toLowerCase()) &&
                         this.$selectedFilterIngredient.every((filter) =>
@@ -147,7 +147,7 @@ class Menu {
                     ) {
                         allItem.add(ingredientObj.ingredient);
                     }
-                });
+                }
             } else if (this._property === 'appliance') {
                 if (
                     recipe.appliance.toLowerCase().includes(this.query.toLowerCase()) &&
@@ -158,7 +158,7 @@ class Menu {
                     allItem.add(recipe.appliance);
                 }
             } else if (this._property === 'ustensils') {
-                recipe.ustensils.forEach((ustensil) => {
+                for (const ustensil of recipe.ustensils) {
                     if (
                         ustensil.toLowerCase().includes(this.query.toLowerCase()) &&
                         this.$selectedFilterUstensils.every((filter) =>
@@ -167,9 +167,9 @@ class Menu {
                     ) {
                         allItem.add(ustensil);
                     }
-                });
+                }
             }
-        });
+        }
 
         return Array.from(allItem);
     }
