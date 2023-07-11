@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 class RecipeCard {
     constructor(recipe) {
         this._recipe = recipe

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 class MenuSearch {
     constructor(Recipes, Property) {
         this.Recipes = Recipes;
@@ -49,6 +50,7 @@ class MenuSearch {
     displayList(Recipes, query) {
         this.clearListWrapper();
 
+        // eslint-disable-next-line no-undef
         const MenuList = new Menu(Recipes, this.Property);
         MenuList.insertMenuList(query);
     }

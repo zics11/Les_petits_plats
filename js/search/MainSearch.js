@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+// eslint-disable-next-line no-unused-vars
 class MainSearch {
     constructor(Recipes) {
         this.Recipes = Recipes
