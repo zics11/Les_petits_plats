@@ -130,11 +130,11 @@ class MainSearch {
     // affiche un message si aucune recette n'est trouvé
     noRecipesMessage() {
         const message = `
-        <p>Aucune recette ne contient <span>${this.$searchFormWrapper.value}</span> vous pouvez chercher « tarte aux pommes », « poisson », etc ...
-    </p>
+        Aucune recette ne contient ${this.$searchFormWrapper.value} vous pouvez chercher « tarte aux pommes », « poisson », etc ...
+    
     `
         this.$messageWrapper.innerHTML = ''
-        this.$messageWrapper.innerHTML = message
+        this.$messageWrapper.innerText = message
     }
     // compte le nombre de recette affiché
     countRecipes(recipes) {
